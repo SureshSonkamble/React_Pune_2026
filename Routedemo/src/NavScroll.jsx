@@ -24,7 +24,7 @@ export default function NavScroll() {
             <Link to="/about" style={{ marginRight: '10px' }}>About</Link>
             <Link to="/ser" style={{ marginRight: '10px' }}>Service</Link>
             <Link to="/contact" style={{ marginRight: '10px' }}>Contact</Link>
-        
+           <Link to="/api" style={{ marginRight: '10px' }}>API</Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

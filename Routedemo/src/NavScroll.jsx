@@ -7,6 +7,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 
 export default function NavScroll() {
+
+   const location = useLocation();
+ // If on /login → do not show navbar
+   if (location.pathname === '/') {
+     return null;
+   } 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>

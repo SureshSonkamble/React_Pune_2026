@@ -1,16 +1,23 @@
 import React from "react";
+import {useEffect, useState } from "react";
 
 export default function Dash() {
      const handleLogout = () => {
     alert("Logged out successfully");
     // later you can add navigate('/login')
   };
+  const [unm,setUnm]=useState('')
+  //onload 
+     useEffect(()=>{
+      setUnm(localStorage.getItem('nm'))
+     alert(unm)
+     },[])
   return (
 
     <>
      {/* NAVBAR */}
       <nav className="navbar navbar-expand-lg bg-white shadow-sm rounded-pill px-4 mx-3 mt-3">
-        <span className="navbar-brand fw-bold">MyWallet</span>
+        <span className="navbar-brand fw-bold">{localStorage.getItem('nm')}</span>
 
         <div className="ms-auto d-flex align-items-center gap-3">
           {/* ROUND CARD ICON */}
@@ -51,7 +58,7 @@ export default function Dash() {
             <div className="d-flex justify-content-between mt-5">
               <div>
                 <small className="text-muted">Card Holder</small>
-                <h6 className="mb-0">Suresh Sonkamble</h6>
+                <h6 className="mb-0">{localStorage.getItem('nm')}</h6>
               </div>
               <div>
                 <small className="text-muted">Expires</small>

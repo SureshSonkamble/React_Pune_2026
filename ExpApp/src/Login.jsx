@@ -3,18 +3,58 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import {useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 //import  './intex.css'
 import logo from './assets/expences.png'; //set image from asset
 export default function Login(){
 
+  
+const [nm, setNm] = useState('');
+const [mob, setMob] = useState(0);
+const [opbl, setOpbal] = useState(0);
+const [umob, setUMob] = useState(0);
  const [show, setShow] = useState(false);
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);   
-
+let hndlnm=(e)=>{setNm(e.target.value)}
+let hndlmob=(e)=>{setMob(e.target.value)}
+let hndlopbal=(e)=>{setOpbal(e.target.value)}
+let hndlumob=(e)=>{setUMob(e.target.value)}
+const navigate = useNavigate();
  let reg=()=>{
-    alert("Signup Here")
+    alert(nm+mob+opbl)
+  
+    axios.post("https://codingshika.com/APP/EXP/add_user.php?mobile="+mob+"&uname="+nm+"&opbal="+opbl)
+    .then(res=>{
+      if(res.data.posts.status=="200"){
+        alert("Registered Success..!")
+        setShow(false)
+      }else{
+        alert("Failed..!")
+         setShow(false)
+      }
+    })
  }
 
+ let login=()=>{
+
+ axios.post("https://codingshika.com/APP/EXP/user_login.php?mobile="+umob)
+    .then(res=>{
+      if(res.data.posts.status=="200"){
+        alert("Login Success..!")
+        console.log(res.data.posts.id)
+        console.log(res.data.posts.name )
+        localStorage.setItem("id",res.data.posts.id)
+        localStorage.setItem("nm",res.data.posts.name)
+       navigate('/home');
+      }else{
+        alert("Failed..!")
+         
+      }
+    })
+
+ }
 
     return(
         <div>
@@ -25,11 +65,11 @@ const handleShow = () => setShow(true);
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-       <Form.Control type="text"  placeholder="Enter a Name:" />
+       <Form.Control type="text" onChange={hndlnm} placeholder="Enter a Name:" />
       <br />
-      <Form.Control type="number"  placeholder="Enter a Mobile:" />
+      <Form.Control type="number" onChange={hndlmob}  placeholder="Enter a Mobile:" />
       <br />
-       <Form.Control type="number" placeholder=" Opening Balance:" />
+       <Form.Control type="number" onChange={hndlopbal} placeholder=" Opening Balance:" />
       <br />
        
       
@@ -40,7 +80,7 @@ const handleShow = () => setShow(true);
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" >
+          <Button variant="primary" onClick={reg} >
             Save Changes
           </Button>
         </Modal.Footer>
@@ -55,13 +95,13 @@ const handleShow = () => setShow(true);
         <div className="mb-3">
           <label className="form-label">Mobile Number</label>
           <input
-            type="number"
+            type="number" onChange={hndlumob}
             className="form-control"
            
             placeholder="Enter mobile number"
           />
         </div>
-        <button className="btn btn-primary w-100" >
+        <button className="btn btn-primary w-100" onClick={login} >
           Login
         </button>
 

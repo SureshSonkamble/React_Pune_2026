@@ -1,8 +1,11 @@
 import './Home.css'
+import Data from "./Data";
 export default function Home(){
+  const userId = 9999;   // parent data
   return(
     <>
     <div class="d">
+        <Data id={userId} />   {/* passing prop */}
     <h1 id="h">This is Home Page</h1>
     <p id="h">Programming Language</p>
     <ol>

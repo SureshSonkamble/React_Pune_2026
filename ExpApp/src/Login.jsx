@@ -2,13 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
 import {useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 //import  './intex.css'
 import logo from './assets/expences.png'; //set image from asset
 export default function Login(){
-
+const { setUser } = useContext(AuthContext);
   
 const [nm, setNm] = useState('');
 const [mob, setMob] = useState(0);
@@ -21,6 +23,7 @@ let hndlnm=(e)=>{setNm(e.target.value)}
 let hndlmob=(e)=>{setMob(e.target.value)}
 let hndlopbal=(e)=>{setOpbal(e.target.value)}
 let hndlumob=(e)=>{setUMob(e.target.value)}
+  
 const navigate = useNavigate();
  let reg=()=>{
     alert(nm+mob+opbl)
@@ -47,6 +50,11 @@ const navigate = useNavigate();
         console.log(res.data.posts.name )
         localStorage.setItem("id",res.data.posts.id)
         localStorage.setItem("nm",res.data.posts.name)
+
+         setUser({
+      id: res.data.posts.id,
+      uname: res.data.posts.name
+    });
        navigate('/home');
       }else{
         alert("Failed..!")

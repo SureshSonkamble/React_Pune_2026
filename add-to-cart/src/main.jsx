@@ -7,6 +7,6 @@ import BookList from './BookList'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BookList />
   </React.StrictMode>
 )

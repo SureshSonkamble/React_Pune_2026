@@ -7,16 +7,17 @@ import NavScrollExample from './NavScrollExample.jsx'
 import Bootstrp from './Bootstrp.jsx'
 import AutoLayoutExample from './AutoLayoutExample.jsx'
 import Data from './Data.jsx'
+import Chk from './Chk.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
    
     <NavScrollExample/>
-    <Data/>
+    {/* <Data/> */}
     {/* <AutoLayoutExample/> */}
-   
+   <Chk/>
     {/* <App /> */}
-    <Home/>
+    {/* <Home/> */}
   </StrictMode>,
 )
